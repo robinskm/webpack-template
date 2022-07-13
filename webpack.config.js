@@ -1,6 +1,4 @@
-// const host = 'tmg-wordpress-foundation.local'; // MAMP host name
-// const port = '8890'; // MAMP port
-// const proxy = 'https://'+host+':'+port; // HTTPS/SSL
+const host = 'webpack-template.local'; // vhost URL
 
 const path = require('path');
 const webpack = require('webpack');
@@ -51,11 +49,15 @@ module.exports = [{
     new MiniCssExtractPlugin({
       filename: "css/index.min.css",
     }),
-    // new BrowserSyncPlugin({
-    //   proxy: 'http://tmg-wordpress-foundation.local',
-    //   // Open browser on start
-    //   open: true
-    // })
+    new BrowserSyncPlugin({
+      host: host,
+      port: 3000,
+      proxy: 'https://' + host,
+      // Open browser on start
+      open: true,
+      https: true,
+      reload:false
+    })
   ],
   optimization: {
     minimize: true,
