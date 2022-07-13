@@ -1,0 +1,36 @@
+.wp-site-blocks {
+  main {
+    margin-top:0;
+    background:pink
+  }
+}
+
+// removes bottom margin for all blocks within a wp-block
+div[class*="__inner-container"] {
+  & > div[class^="wp-block-"],
+  & > div[class*="wp-block-"] {
+    margin-bottom:0;
+  }
+}
+
+div[class*="wp-container-"] .alignfull {
+  margin-top:0;
+}
+
+.wp-block-cover {
+  margin-top:0;
+  .wp-block-cover__inner-container {
+    .has-text-color {
+      &.has-background-color {
+        text-shadow:0 0 10px $foreground-color;
+      }
+    }
+  }
+  &.alignfull {}
+}
+
+.wp-block-columns {
+  .wp-block-column {
+    margin:0;
+  }
+}

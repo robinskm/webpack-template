@@ -1,0 +1,71 @@
+// colors
+$primary: var(--wp--preset--color--primary);
+$secondary: var(--wp--preset--color--secondary);
+$tertiary:var(--wp--preset--color--tertiary);
+
+$background-color:var(--wp--preset--color--background);
+$foreground-color:var(--wp--preset--color--foreground);
+
+// incase back/foreground colors do not include white/black
+$black: $background-color;
+$white: $foreground-color;
+
+$colors : (
+  primary: $primary,
+  secondary: $secondary,
+  tertiary: $tertiary,
+  background-color: $background-color,
+  foreground-color: $foreground-color,
+  black: $black,
+  white: $white,
+);
+
+// font sizes
+$body-size:var(--wp--preset--font-size--medium);
+$h2-size:var(--wp--preset--font-size--x-large);
+$h3-size:var(--wp--preset--font-size--large);
+$h4-size:calc(var(--wp--preset--font-size--medium) - .1rem);
+
+//spacing sizes
+$spacing-xs:15px;
+$spacing-sm:30px;
+$spacing-md:50px;
+$spacing-lg:70px;
+$spacing-xl:100px;
+
+//font families
+$font: 'Archivo', Helvetica, sans-serif;
+$font-bold: 'Archivo', Helvetica, sans-serif;
+$headline-font: 'Domine', Helvetica, sans-serif;
+$awesome: 'FontAwesome';
+$dashicon: 'dashicons';
+
+$nav-break:1280px;
+
+// breakpoint
+$breakpoints: (
+  xs: 539px,
+  sm: 767px,
+  md: 1023px,
+  lg: 1278px,
+  xl: 1365px,
+  nav-break:1280px
+);
+
+// custom responsive points
+$container-max-width: 1440px;
+
+//animations
+$transition: '.2s ease-in-out';
+%border {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -$spacing-md;
+    left: 0;
+    height: $spacing-md;
+  }
+}

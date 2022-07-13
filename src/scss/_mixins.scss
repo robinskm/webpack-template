@@ -1,0 +1,162 @@
+// responsive breakpoints
+
+// if the breakpoint exists in the map, get the breakpoint value & write the media query.
+// otherwise, log a warning
+// @include min-width(sm) {}
+@mixin min-width($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (min-width: $breakpoint-value + 1) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// @include max-width(sm) {}
+@mixin max-width($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (max-width: ($breakpoint-value)) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+
+// if both the lower and upper breakpoints exists in the map, get the lower and upper breakpoints & write the media query.
+// otherwise, log a warning
+// @include respond-between(sm, md) {}
+@mixin respond-between($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  }
+
+  @else {
+    @if (map-has-key($breakpoints, $lower)==false) {
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    @if (map-has-key($breakpoints, $upper)==false) {
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}
+
+// @function color($key: $i) {
+//   @return map-get($colors, $key);
+// }
+// ratio box
+// .element { @include maintain-ratio(16, 9); }
+@mixin maintain-ratio($width, $height) {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  >div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin reset-ratio {
+  position: relative;
+
+  &:before {
+    padding-top: initial;
+  }
+
+  >div {
+    position: initial;
+  }
+}
+
+// cro-bro flexbox
+@mixin flex {
+  display: flex;
+  display: -webkit-flex;
+}
+
+// cro-bro transform
+@mixin transform($str) {
+  -webkit-transform: #{$str};
+  transform: #{$str};
+}
+
+// cro-bro transition
+@mixin transition($str) {
+  -webkit-transition: #{$str};
+  transition: #{$str};
+}
+
+// cro-bro animation
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  animation: #{$str};
+}
+
+// cro-bro -webkit-
+@mixin webkit($style, $pos) {
+  -webkit-#{$style}: $pos;
+  #{$style}: $pos;
+}
+
+// ADA commpliant hover
+@mixin hover {
+
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+// responsive padding for inner element styling
+@mixin responsive-padding {
+  padding-left:$spacing-lg;
+  padding-right:$spacing-lg;
+
+  @include max-width(sm) {
+    padding-left:$spacing-md;
+    padding-right:$spacing-md;
+  }
+  @include max-width(xs) {
+    padding-left:$spacing-sm;
+    padding-right:$spacing-sm;
+  }
+}
+
+@mixin inner-elements {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p,
+  .wp-block-buttons,
+  .wp-block-image {
+    @content;
+  }
+}
